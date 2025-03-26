@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Configuración FluxDev</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { padding: 20px; }
+        .form-section { margin-bottom: 20px; border-bottom: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Generador de Configuración AI Toolkit</h1>
+        <p class="mb-4">
+            Link de repositorio AI toolkit:
+            <a href="">https://github.com/ostris/ai-toolkit</a>
+        </p>
+        <form id="configForm" method="POST" action="/generate">
+            <div class="form-section">
+                <h3>Configuración General</h3>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label>Nombre del Proyecto</label>
+                        <input type="text" name="name" class="form-control" value="angel" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Versión</label>
+                        <input type="text" name="version" class="form-control" value="1.0">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Red Neural</h3>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label>Linear</label>
+                        <input type="number" name="linear" class="form-control" value="16">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Linear Alpha</label>
+                        <input type="number" name="linear_alpha" class="form-control" value="16">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Guardado</h3>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label>Tipo de Dato</label>
+                        <select name="save_dtype" class="form-control">
+                            <option value="float16">Float 16</option>
+                            <option value="float32">Float 32</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Guardar Cada</label>
+                        <input type="number" name="save_every" class="form-control" value="240">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Máximo de Guardados</label>
+                        <input type="number" name="max_step_saves" class="form-control" value="4">
+                    </div>
+                </div>
+                <div class="form-check mb-3">
+                    <input type="checkbox" name="push_to_hub" class="form-check-input" id="pushToHub">
+                    <label class="form-check-label" for="pushToHub">Subir a Hub</label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Entrenamiento</h3>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label>Pasos de Entrenamiento</label>
+                        <input type="number" name="train_steps" class="form-control" value="2400">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label>Batch Size</label>
+                        <input type="number" name="batch_size" class="form-control" value="1">
+                    </div>
+                    
+                    <div class="col-md-3 mb-3">
+                        <label>Tasa de Aprendizaje</label>
+                        <input type="number" name="learning_rate" step="0.0001" class="form-control" value="0.0001">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Scheduler de Ruido</label>
+                        <input type="text" name="noise_scheduler" class="form-control" value="flowmatch">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="form-check">
+                            <input type="checkbox" name="train_unet" class="form-check-input" id="trainUnet" checked>
+                            <label class="form-check-label" for="trainUnet">Entrenar UNet</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-check">
+                            <input type="checkbox" name="use_ema" class="form-check-input" id="useEma" checked>
+                            <label class="form-check-label" for="useEma">Usar EMA</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>EMA Decay</label>
+                        <input type="number" name="ema_decay" step="0.01" class="form-control" value="0.99">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Dataset</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>Ruta del Dataset</label>
+                        <input type="text" name="dataset_path" class="form-control" value="/workspace/ai-toolkit/dataset">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label>Resoluciones</label>
+                        <input type="number" name="resolution" class="form-control" placeholder="768" value="768" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Prompts de Ejemplo</h3>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="">Width:</label>
+                        <input type="number" name="width" class="form-control" value="768">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="">Height:</label>
+                        <input type="number" name="height" class="form-control" value="768">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="">Generar cada:</label>
+                        <input type="text" name="sample_every" class="form-control" value="250">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Prompts (uno por línea)</label>
+                    <textarea name="prompts" class="form-control" rows="4">a photograph of name woman with red hair, playing chess at the park, bomb going off in the background
+a photograph of name woman holding a coffee cup, in a beanie, sitting at a cafe
+a photograph of name woman is a DJ at a night club, fish eye lens, smoke machine, lazer lights, holding a martini
+a photograph of name woman showing off his cool new t shirt at the beach, a shark is jumping out of the water in the background</textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Generar Configuración YAML</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

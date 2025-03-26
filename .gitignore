@@ -1,0 +1,34 @@
+# Ignorar la carpeta /workspace y todo su contenido
+/workspace/
+
+# Ignorar archivos específicos
+docker-compose.yml
+Dockerfile
+
+# Ignorar archivos y carpetas de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar entornos virtuales de Python
+venv/
+.env
+*.env
+
+# Ignorar archivos de logs
+logs/
+*.log
+
+# Ignorar dependencias de Python instaladas localmente
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ignorar archivos de compilación de IDEs y editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignorar archivos de Docker si es necesario
+.dockerignore
